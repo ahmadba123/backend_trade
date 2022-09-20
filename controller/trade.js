@@ -1,6 +1,7 @@
 const Trade = require("../model/trade");
 const db = require("../database_Connection/config");
 
+//this function to get data for trade  from data base
 exports.getAllTrade = async (req, res, next) => {
   try {
     const [Trades, _] = await Trade.findAll(req.query.limit, req.query.offset);
@@ -11,30 +12,7 @@ exports.getAllTrade = async (req, res, next) => {
     next(error);
   }
 };
-// exports.getAllTrade = async (req, res, next) => {
-//   try {
-//      //pagination variables
-//      let page = req.query.page || 1;
-//      let limit = req.query.limit || 12;
-//      let skip = (page - 1) * limit;
-//      // number of pages to send it in the response
-//      let total = await Dish.countDocuments(query);
-//      let pages = Math.ceil(total / limit);
-//      let sql = "SELECT * FROM mt5_deals LIMIT ?, ?";
-//      db.execute(sql).then(() =>{
-
-//   const response =  Dish.find(query)
-//         //  .populate("cook")
-//          .skip(skip)
-//          .limit(limit)
-//          .sort(sort);
- 
-//        res.status(200).json({ success: true, data: response, pages, total });
-//      })
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+//this function to add data for trade from data base
 exports.createNewTrade = async (req, res, next) => {
   try {
     let dataCreated = new Date();
@@ -61,6 +39,7 @@ exports.createNewTrade = async (req, res, next) => {
       res.status(200).json({ success: true, message: "Trade Added !"  })
     );
   }
+
   catch (error) {
     next(error);
   }
